@@ -3,7 +3,6 @@ from tkinter import ttk
 import math
 from random import randint, random, sample, choice
 from PIL import Image, ImageDraw, ImageTk, ImageColor, ImageGrab
-import libfuturize
 
 
 class ArtGenerator:
@@ -81,6 +80,7 @@ class ArtGenerator:
     def create_square_art(self, square):
 
         self.add_triangle(square)
+        self.add_semicircle(square)
         
         miniSquares = self.divide_square(square, 2)
         
@@ -100,6 +100,7 @@ class ArtGenerator:
 
         return square_points
 
+    # Creates an image of a polygon and places it on the canvas to allow alpha channels
     # https://stackoverflow.com/questions/62117203/how-to-make-a-tkinter-canvas-polygon-transparent
     def create_polygon(self, *args, **kwargs):
         if "alpha" in kwargs:
@@ -124,8 +125,29 @@ class ArtGenerator:
                 return self.cv.create_image(0, 0, image=self.images[-1], anchor="nw")
             raise ValueError("fill color must be specified!")
         return self.cv.create_polygon(*args, **kwargs)
+    
+    def create_arc(self, *args, **kwargs):
+        if "alpha" in kwargs:
+            if "fill" in kwargs:
+                # Get and process the input data
+                fill = self.root.winfo_rgb(kwargs.pop("fill")) + (int(kwargs.pop("alpha") * 255),)
+                outline = kwargs.pop("outline") if "outline" in kwargs else None
 
-    # Adds a triangle in a random side 
+                # We need to find a rectangle the polygon is inscribed in
+                # (max(args[::2]), max(args[1::2])) are x and y of the bottom right point of this rectangle
+                # and they also are the width and height of it respectively (the image will be inserted into
+                # (0, 0) coords for simplicity)
+                image = Image.new("RGBA", (max(args[::2]), max(args[1::2])))
+                ImageDraw.Draw(image).arc(args, fill=choice(list(ImageColor.colormap.items()))[0], outline=outline)
+
+                # prevent the Image from being garbage-collected
+                self.images.append(ImageTk.PhotoImage(image))
+                # insert the Image to the 0, 0 coords
+                return self.cv.create_image(0, 0, image=self.images[-1], anchor="nw")
+            raise ValueError("fill color must be specified!")
+        return self.cv.create_arc(*args, **kwargs)
+
+    # Adds a triangle on a random side or corner of a square 
     def add_triangle(self, square):
         # draw triangle randomly in the N, NE, E, ..., NW of a given square
         p1 = [square[0][0], square[0][1]]
@@ -135,7 +157,7 @@ class ArtGenerator:
         center = [int((square[0][0] + square[1][0]) / 2),
                   int((square[0][1] + square[1][1]) / 2)]
 
-        points = [p1, p2, p4, p3, p1, p2]  # extra p1 allows easy looping
+        points = [p1, p2, p4, p3, p1, p2]  # extra p1 and p2 allows easy looping
 
         p_start = randint(0, 3)
 
@@ -160,6 +182,25 @@ class ArtGenerator:
                                 alpha=random()
                                 )
 
+    # Adds a semicircle/quartercircle to a random side or corner of a square
+    def add_semicircle(self, square):
+        p1 = [square[0][0], square[0][1]]
+        p2 = [square[1][0], square[0][1]]
+        p3 = [square[0][0], square[1][1]]
+        p4 = [square[1][0], square[1][1]]
+        
+        points = [p1, p2, p4, p3, p1, p2]  # extra p1 and p2 allows easy looping
+        p_start = randint(0, 3)
+
+        if randint(0, 1): # Corner quarter circle
+            self.create_arc(points[p_start][0],
+                            points[p_start][1],
+                            points[p_start + 2][0],
+                            points[p_start + 2][1],
+                            10, 70)
+            
+        else: # Side semi-circle
+            pass
 
 """
     def saveCanvasImage(self): #This function will be used to save the Tkinter canvas as an image
