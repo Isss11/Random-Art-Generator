@@ -64,6 +64,7 @@ class ArtGenerator:
         # Contains all images used in the artwork
         self.images = []
 
+    # Creates the main squares of the artwork and calls create square art on them
     def create_squares(self):
         self.cv.delete('all')
 
@@ -73,10 +74,9 @@ class ArtGenerator:
         square_points = self.divide_square([[0, 0], [720, 720]], degree, spacing)
 
         for square in square_points:
-            # self.cv.create_rectangle(square[0][0], square[0][1], square[1][0], square[1][1], fill="blue")  # FOR TESTING ONLY
-
             self.create_square_art(square)
 
+    # Creates randomized art on any inputted square
     def create_square_art(self, square):
 
         self.add_triangle(square)
@@ -84,9 +84,8 @@ class ArtGenerator:
         miniSquares = self.divide_square(square, 2)
         
         for miniSquare in miniSquares:
-            self.add_triangle(miniSquare)
-
-        #self.create_polygon(10, 10, 10, 20, 200, 300, 250, 150, 10, 10, fill="blue", alpha=0.5)
+            if randint(1, 10) > 7:
+                self.add_triangle(miniSquare)
 
     # Divides a given square into 'degree' pieces
     # Increase spacing to add space between squares, Decrease to add overlap
@@ -125,6 +124,7 @@ class ArtGenerator:
             raise ValueError("fill color must be specified!")
         return self.cv.create_polygon(*args, **kwargs)
 
+    # Adds a triangle in a random side 
     def add_triangle(self, square):
         # draw triangle randomly in the N, NE, E, ..., NW of a given square
         p1 = [square[0][0], square[0][1]]
