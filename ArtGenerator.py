@@ -63,6 +63,18 @@ class ArtGenerator:
 
         # Contains all images used in the artwork
         self.images = []
+        
+
+    def saveCanvasImage(self): #This function will be used to save the Tkinter canvas as an image
+        self.cv.update() #The positions of canvas are updated, and then using the coordinates of it we get a screeshot of the artwork
+
+        imageX1 = self.root.winfo_rootx() + self.cv.winfo_rootx()
+        imageY1 = self.root.winfo_rooty () + self.cv.winfo_rooty()
+        imageX2 = imageX1 + self.cv.winfo_width()
+
+        imageY2 = imageY1 + self.cv.winfo_height()
+
+        ImageGrab.grab().crop((imageX1, imageY1, imageX2, imageY2)).save("yourArtwork.jpg")
 
     # Creates the main squares of the artwork and calls create square art on them
     def create_squares(self):
@@ -75,6 +87,8 @@ class ArtGenerator:
 
         for square in square_points:
             self.create_square_art(square)
+
+        self.saveCanvasImage()
 
     # Creates randomized art on any inputted square
     def create_square_art(self, square):
@@ -203,22 +217,6 @@ class ArtGenerator:
         else: # Side semi-circle
             pass
 '''
-"""
-    def saveCanvasImage(self): #This function will be used to save the Tkinter canvas as an image
-        x = self.root.winfo_rootx() + self.artwork.winfo_x()
-        y = self.root.winfo_rooty() + self.artwork.winfo_y()
-        x1 = x + self.artwork.winfo_width()
-        y1 = y + self.artwork.winfo_height() #Getting the dimensions of the top left corner, then the bottom right corner of the canvas
-        
-        try:
-            print(self.root.winfo_rootx(), self.artwork.winfo_x(), self.root.winfo_rooty(), self.artwork.winfo_y()) #FIXME screenshot actualy window
-            print(x, y, x1, y1)
-            artworkImage = ImageGrab.grab().save("test.jpg")
-            
-            #.crop((x, y, x1, y1)).save("test.jpg") #screenshots canvas
-        except:
-            print("Wrong file path input. Read the README for details.")
-"""
 
 if __name__ == '__main__':
     root = Tk()
