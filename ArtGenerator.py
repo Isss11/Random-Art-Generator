@@ -14,6 +14,9 @@ class ArtGenerator:
 
         self.drawInputWidgets() #this basically draws all the labels and input widgets needed to get user input to draw the random painting 
 
+        self.artwork = Canvas(self.frame, width=500, height = 400, background='gray75')
+        self.artwork.grid(column=4, row = 0, sticky=(N, W, E, S), rowspan=24, padx= (40, 0))
+
     def drawInputWidgets(self): #this was created to simplify __init__ by making it so that the input widgets would be put in another function for readability
         self.artLabel = ttk.Label(self.frame, text = "Random Art Generator", font= "helvetica 14 bold")
         self.artLabel.grid(column= 0, row = 0, columnspan= 4, padx=5)
