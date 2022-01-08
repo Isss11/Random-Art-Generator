@@ -3,6 +3,7 @@ from tkinter import ttk
 import math
 from random import randint, random, sample, choice
 from PIL import Image, ImageDraw, ImageTk, ImageColor, ImageGrab
+import libfuturize
 
 
 class ArtGenerator:
