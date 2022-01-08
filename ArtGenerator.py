@@ -32,11 +32,12 @@ class ArtGenerator:
 
     # Creates Input Widgets and Canvas
     def createInputWidgets(self):
+        
         # Degree of art squares
         # 1 means 1x1 grid, 3 means 3x3 grid, etc. 
         self.squareDegree = StringVar()
 
-        self.squareDegreeScale = ttk.Scale(self.frame, orient=HORIZONTAL, length=200, from_=1, to=20, value=1, command=lambda s: self.squareDegree.set(math.floor(float(s))))
+        self.squareDegreeScale = ttk.Scale(self.frame, orient=HORIZONTAL, length=200, from_=1, to=20, value=10, command=lambda s: self.squareDegree.set(math.floor(float(s))))
         self.squareDegreeScale.set(1)
         self.squareDegreeScale.grid(column=0, row=2, pady=(20, 0), padx=20)
 
@@ -45,7 +46,7 @@ class ArtGenerator:
 
         self.squareSpacing = StringVar()
         
-        self.spacingScale = ttk.Scale(self.frame, orient= HORIZONTAL, length = 200, from_=0.1, to=15, command=lambda s: self.squareSpacing.set(float(s)))
+        self.spacingScale = ttk.Scale(self.frame, orient= HORIZONTAL, length = 200, from_=0.1, to=15, value=10, command=lambda t: self.squareSpacing.set(round(float(t), 2)))
         self.spacingScale.set(10)
         self.spacingScale.grid(column = 0, row=9, pady= 10, rowspan=2)
 
@@ -63,9 +64,6 @@ class ArtGenerator:
         # Contains all images used in the artwork
         self.images = []
 
-    '''
-    Creates squares on canvas
-    '''
     def create_squares(self):
         self.cv.delete('all')
 
@@ -78,21 +76,14 @@ class ArtGenerator:
 
             self.create_square_art(square)
 
-    '''
-    Creates square art for a given square 
-    '''
     def create_square_art(self, square):
 
         self.add_triangle(square)
-        
-        
 
         #self.create_polygon(10, 10, 10, 20, 200, 300, 250, 150, 10, 10, fill="blue", alpha=0.5)
-    
-    '''
-    Divides a given square into 'degree' pieces
-    Increase spacing to add space between squares, Decrease to add overlap
-    '''
+
+    # Divides a given square into 'degree' pieces
+    # Increase spacing to add space between squares, Decrease to add overlap
     def divide_square(self, square, degree, spacing=1):
         new_square_width = int(math.ceil(abs(square[0][0] - square[1][0])/(degree)))
         square_points = []
@@ -103,10 +94,7 @@ class ArtGenerator:
 
         return square_points
 
-    '''
-    Creates Image from shapes to allow use of alpha channels
-    https://stackoverflow.com/questions/62117203/how-to-make-a-tkinter-canvas-polygon-transparent
-    '''
+    # https://stackoverflow.com/questions/62117203/how-to-make-a-tkinter-canvas-polygon-transparent
     def create_polygon(self, *args, **kwargs):
         if "alpha" in kwargs:
             if "fill" in kwargs:
