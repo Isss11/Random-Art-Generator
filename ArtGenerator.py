@@ -25,8 +25,6 @@ class Picture:
         for square in square_points:
             self.create_square_art(square)
 
-        self.saveCanvasImage()
-
     # Creates randomized art on any inputted square
     def create_square_art(self, square):
         self.add_triangle(square)
