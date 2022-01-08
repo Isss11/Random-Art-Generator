@@ -50,14 +50,16 @@ class ArtGenerator:
         self.degreeTitle.grid(column=0, row=8, columnspan=3, pady=15)
 
         #Now Creating the scale and the degree variable
-        self.degree = 11 #By default it will start at this number
+        self.degree = StringVar()
+        self.degree.set('10.0')
 
-        self.degreeScale = ttk.Scale(self.frame, orient= HORIZONTAL, length = 200, from_=0.1, to=10, variable=self.degree) #Created scale, this one is a bit simpler then the last one
+        self.degreeScale = ttk.Scale(self.frame, orient= HORIZONTAL, length = 200, from_=0.1, to=10, command= lambda t: self.degree.set(round(float(t), 2))) #Created scale
         self.degreeScale.grid(column = 0, row=9, pady= 10, rowspan=2)
 
         #Creating a label to write out the value of the scale variable (self.degree)
         self.degreeValueText = ttk.Label(self.frame, textvariable=self.degree)
         self.degreeValueText.grid(column = 0, row= 11, pady= 10)
+
 
         self.generateArtButton = ttk.Button(
             self.frame, text="Create Artwork", command=lambda: self.create_squares())
@@ -65,7 +67,7 @@ class ArtGenerator:
         self.generateArtButton.grid(row=16, column=0, pady=(200, 0), ipady=10, ipadx=20, rowspan=8)
 
         # Canvas
-        self.cv = Canvas(self.frame, width=720, height=720)
+        self.cv = Canvas(self.frame, width=720, height=720, highlightbackground="gray49")
         self.cv.grid(row=0, column=4, rowspan=24)
 
         self.images = []
