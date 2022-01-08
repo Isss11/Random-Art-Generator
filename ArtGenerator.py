@@ -23,13 +23,13 @@ class ArtGenerator:
     # Creates GUI Labels
     def createLabels(self):
         self.artLabel = ttk.Label(self.frame, text="Random Art Generator", font="helvetica 14 bold")
-        self.artLabel.grid(column=0, row=0, columnspan=4, padx=5)
+        self.artLabel.grid(column=0, row=0, sticky=N)
         
         self.squareSidesLabel = ttk.Label(self.frame, text="Number of Squares on Each Side", font="helvetica 10 bold")
-        self.squareSidesLabel.grid(column=0, row=1, columnspan=3, pady=15)
+        self.squareSidesLabel.grid(column=0, row=1, sticky= N)
         
         self.spacingTitle = ttk.Label(self.frame, text="Enter Factor of Spacing", font="helvetica 10 bold")
-        self.spacingTitle.grid(column=0, row=8, columnspan=3, pady=15)
+        self.spacingTitle.grid(column=0, row=4, sticky= N)
 
     # Creates Input Widgets and Canvas
     def createInputWidgets(self):
@@ -39,28 +39,28 @@ class ArtGenerator:
         self.squareDegree = StringVar()
 
         self.squareDegreeScale = ttk.Scale(self.frame, orient=HORIZONTAL, length=200, from_=1, to=20, value=10, command=lambda s: self.squareDegree.set(math.floor(float(s))))
-        self.squareDegreeScale.set(1)
-        self.squareDegreeScale.grid(column=0, row=2, pady=(20, 0), padx=20)
+        self.squareDegreeScale.set(10)
+        self.squareDegreeScale.grid(column=0, row=2, padx=20, sticky=N)
 
         self.squareSidesLabel = ttk.Label(self.frame, textvariable=self.squareDegree)
-        self.squareSidesLabel.grid(column=0, row=3, pady=10, rowspan=5)
+        self.squareSidesLabel.grid(column=0, row=3, sticky=N)
 
         self.squareSpacing = StringVar()
         
         self.spacingScale = ttk.Scale(self.frame, orient= HORIZONTAL, length = 200, from_=0.1, to=15, value=10, command=lambda t: self.squareSpacing.set(round(float(t), 2)))
         self.spacingScale.set(10)
-        self.spacingScale.grid(column = 0, row=9, pady= 10, rowspan=2)
+        self.spacingScale.grid(column = 0, row=5, padx=20, sticky=N)
 
         # Creating a label to write out the value of the scale variable (self.degree)
         self.spacingValueText = ttk.Label(self.frame, textvariable=self.squareSpacing)
-        self.spacingValueText.grid(column = 0, row= 11, pady= 10)
+        self.spacingValueText.grid(column = 0, row= 6)
 
         self.generateArtButton = ttk.Button(self.frame, text="Create Artwork", command=lambda: self.create_squares())
-        self.generateArtButton.grid(row=16, column=0, pady=(200, 0), ipady=10, ipadx=20, rowspan=8)
+        self.generateArtButton.grid(row=15, column=0, ipady=10, ipadx=20, sticky=S)
 
         # Canvas
         self.cv = Canvas(self.frame, width=720, height=720, highlightbackground="gray49")
-        self.cv.grid(row=0, column=4, rowspan=24)
+        self.cv.grid(row=0, column=1, rowspan=16)
 
         # Contains all images used in the artwork
         self.images = []
