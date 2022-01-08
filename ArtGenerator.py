@@ -61,7 +61,7 @@ class ArtGenerator:
         self.cv.delete('all')
 
         degree = int(self.squareSidesFloat.get())
-        square_points = self.divide_square([[0, 0], [720, 720]], degree, 10)
+        square_points = self.divide_square([[0, 0], [720, 720]], degree, 10) # FIXME ADD OVERLAP SLIDER
 
         for square in square_points:
             # self.cv.create_rectangle(square[0][0], square[0][1], square[1][0], square[1][1], fill="blue")  # FOR TESTING ONLY
