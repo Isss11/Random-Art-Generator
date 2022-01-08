@@ -36,10 +36,10 @@ class ArtGenerator:
         # Degree of art squares
         # 1 means 1x1 grid, 3 means 3x3 grid, etc. 
         self.squareDegree = StringVar()
-        self.squareDegree.set('1')
 
-        self.squareSidesScale = ttk.Scale(self.frame, orient=HORIZONTAL, length=200, from_=1, to=20, value=1, command=lambda s: self.squareDegree.set(math.floor(float(s))))  # learned a lot of that command from stackOverFlow (adjusted it a bit)
-        self.squareSidesScale.grid(column=0, row=2, pady=(20, 0), padx=20)
+        self.squareDegreeScale = ttk.Scale(self.frame, orient=HORIZONTAL, length=200, from_=1, to=20, value=1, command=lambda s: self.squareDegree.set(math.floor(float(s))))
+        self.squareDegreeScale.set(1)
+        self.squareDegreeScale.grid(column=0, row=2, pady=(20, 0), padx=20)
 
         self.squareSidesLabel = ttk.Label(self.frame, textvariable=self.squareDegree)
         self.squareSidesLabel.grid(column=0, row=3, pady=10, rowspan=5)
@@ -95,7 +95,6 @@ class ArtGenerator:
         return square_points
 
     # https://stackoverflow.com/questions/62117203/how-to-make-a-tkinter-canvas-polygon-transparent
-
     def create_polygon(self, *args, **kwargs):
         if "alpha" in kwargs:
             if "fill" in kwargs:
