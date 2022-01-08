@@ -37,19 +37,32 @@ class ArtGenerator:
 
         self.squareSidesScale = ttk.Scale(self.frame, orient=HORIZONTAL, length=200, from_=1, to=20, value=1, command=lambda s: self.squareSidesFloat.set(
             math.floor(float(s))))  # learned a lot of that command from stackOverFlow (adjusted it a bit)
-        self.squareSidesScale.grid(
-            column=0, row=2, pady=25, padx=20, rowspan=4)
+        self.squareSidesScale.grid(column=0, row=2, pady=(20, 0), padx=20)
 
-        self.squareSidesLabel = ttk.Label(
-            self.frame, textvariable=self.squareSidesFloat)
+        self.squareSidesLabel = ttk.Label(self.frame, textvariable=self.squareSidesFloat)
         # added these rows at the end to space out the button a lot
-        self.squareSidesLabel.grid(column=0, row=6, pady=10, rowspan=10)
+        self.squareSidesLabel.grid(column=0, row=3, pady=10, rowspan=5)
+
+        #Creating scale and labels to get the degree of spacing
+        #Starting with the title
+
+        self.degreeTitle = ttk.Label(self.frame, text="Enter a Degree of Spacing", font="helvetica 10 bold")
+        self.degreeTitle.grid(column=0, row=8, columnspan=3, pady=15)
+
+        #Now Creating the scale and the degree variable
+        self.degree = 11 #By default it will start at this number
+
+        self.degreeScale = ttk.Scale(self.frame, orient= HORIZONTAL, length = 200, from_=0.1, to=10, variable=self.degree) #Created scale, this one is a bit simpler then the last one
+        self.degreeScale.grid(column = 0, row=9, pady= 10, rowspan=2)
+
+        #Creating a label to write out the value of the scale variable (self.degree)
+        self.degreeValueText = ttk.Label(self.frame, textvariable=self.degree)
+        self.degreeValueText.grid(column = 0, row= 11, pady= 10)
 
         self.generateArtButton = ttk.Button(
             self.frame, text="Create Artwork", command=lambda: self.create_squares())
         # trying to pad this a lot so  that we have a nice big space between the scale and button
-        self.generateArtButton.grid(row=16, column=0, pady=(
-            200, 0), ipady=10, ipadx=20, rowspan=8)
+        self.generateArtButton.grid(row=16, column=0, pady=(200, 0), ipady=10, ipadx=20, rowspan=8)
 
         # Canvas
         self.cv = Canvas(self.frame, width=720, height=720)
@@ -61,7 +74,7 @@ class ArtGenerator:
         self.cv.delete('all')
 
         degree = int(self.squareSidesFloat.get())
-        square_points = self.divide_square([[0, 0], [720, 720]], degree, 10) # FIXME ADD OVERLAP SLIDER
+        square_points = self.divide_square([[0, 0], [720, 720]], degree, 10)
 
         for square in square_points:
             # self.cv.create_rectangle(square[0][0], square[0][1], square[1][0], square[1][1], fill="blue")  # FOR TESTING ONLY
