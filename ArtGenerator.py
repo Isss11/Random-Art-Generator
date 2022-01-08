@@ -14,7 +14,6 @@ class Picture:
         
         self.ctx.set_source_rgba(1, 1, 1, 0)
         self.ctx.paint()
-
         
         self.create_squares()
         

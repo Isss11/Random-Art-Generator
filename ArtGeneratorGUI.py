@@ -62,10 +62,6 @@ class ArtGenerator:
         # Canvas
         self.cv = Canvas(self.frame, width=720, height=720, highlightbackground="gray21")
         self.cv.grid(row=0, column=1, rowspan=16)
-        
-        photoimage = ImageTk.PhotoImage(file="funny.png")
-        self.root.photoimage = photoimage
-        self.cv.create_image((0, 0), image=photoimage, anchor=NW)
 
     def create_art(self):
         Picture(int(self.squareDegree.get()), float(self.squareSpacing.get()))
