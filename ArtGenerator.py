@@ -69,6 +69,7 @@ class ArtGenerator:
 
         degree = int(self.squareDegree.get())
         spacing = float(self.squareSpacing.get())
+        
         square_points = self.divide_square([[0, 0], [720, 720]], degree, spacing)
 
         for square in square_points:
@@ -79,6 +80,11 @@ class ArtGenerator:
     def create_square_art(self, square):
 
         self.add_triangle(square)
+        
+        miniSquares = self.divide_square(square, 2)
+        
+        for miniSquare in miniSquares:
+            self.add_triangle(miniSquare)
 
         #self.create_polygon(10, 10, 10, 20, 200, 300, 250, 150, 10, 10, fill="blue", alpha=0.5)
 
