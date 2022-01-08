@@ -77,7 +77,7 @@ class ArtGenerator:
     # Divides a given square into 'degree' pieces
     # Increase spacing to add space between squares, Decrease to add overlap
     def divide_square(self, square, degree, spacing=1):
-        new_square_width = int(abs(square[0][0] - square[1][0])/(degree))
+        new_square_width = int(math.ceil(abs(square[0][0] - square[1][0])/(degree)))
         square_points = []
         for x in range(square[0][0], square[1][0], new_square_width):
             for y in range(square[0][1], square[1][1], new_square_width):
