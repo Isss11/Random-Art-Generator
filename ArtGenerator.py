@@ -80,7 +80,7 @@ class ArtGenerator:
     def create_square_art(self, square):
 
         self.add_triangle(square)
-        self.add_semicircle(square)
+        #self.add_semicircle(square)
         
         miniSquares = self.divide_square(square, 2)
         
@@ -125,7 +125,7 @@ class ArtGenerator:
                 return self.cv.create_image(0, 0, image=self.images[-1], anchor="nw")
             raise ValueError("fill color must be specified!")
         return self.cv.create_polygon(*args, **kwargs)
-    
+    '''
     def create_arc(self, *args, **kwargs):
         if "alpha" in kwargs:
             if "fill" in kwargs:
@@ -145,7 +145,8 @@ class ArtGenerator:
                 # insert the Image to the 0, 0 coords
                 return self.cv.create_image(0, 0, image=self.images[-1], anchor="nw")
             raise ValueError("fill color must be specified!")
-        return self.cv.create_arc(*args, **kwargs)
+        return self.cv.create_arc(*args, **kwargs)\
+    '''
 
     # Adds a triangle on a random side or corner of a square 
     def add_triangle(self, square):
@@ -181,7 +182,7 @@ class ArtGenerator:
                                 fill='#40E0D0',
                                 alpha=random()
                                 )
-
+'''
     # Adds a semicircle/quartercircle to a random side or corner of a square
     def add_semicircle(self, square):
         p1 = [square[0][0], square[0][1]]
@@ -201,7 +202,7 @@ class ArtGenerator:
             
         else: # Side semi-circle
             pass
-
+'''
 """
     def saveCanvasImage(self): #This function will be used to save the Tkinter canvas as an image
         x = self.root.winfo_rootx() + self.artwork.winfo_x()
