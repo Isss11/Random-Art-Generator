@@ -15,19 +15,23 @@ class ArtGenerator:
 
     def drawInputWidgets(self): #this was created to simplify __init__ by making it so that the input widgets would be put in another function for readability
         self.artLabel = ttk.Label(self.frame, text = "Random Art Generator", font= "helvetica 14 bold")
-        self.artLabel.grid(column= 0, row = 0, columnspan= 4, ipadx=5, sticky=W)
+        self.artLabel.grid(column= 0, row = 0, columnspan= 4, padx=5)
 
         self.squareSidesLabel = ttk.Label(self.frame, text="Number of Squares on Each Side", font = "helvetica 10 bold")
-        self.squareSidesLabel.grid(column = 0, row = 1, columnspan= 3) #setting up info labels
+        self.squareSidesLabel.grid(column = 0, row = 1, columnspan= 3, pady=15) #setting up info labels
 
-        #Now creating a scale to get user input on the amount of squares on each side
-        self.squareSides = IntVar(value= 1)
-        self.squareSidesScale = ttk.Scale(self.frame, orient=HORIZONTAL, length=100, from_=1.0, to= 5.0, variable= self.squareSides, command=self.intSquareSides)
-        self.squareSidesScale.grid(column = 0, row = 2, ipady = 40)
+        #Now creating a scale to get user input on the amount of squares on each side #FIXME -- might need a lambda function to fix decimal issue
+        self.squareSidesFloat = 1
 
-        #Creating a label that posts the number of squares on each side
-        self.squareSidesLabel = ttk.Label(self.frame, textvariable=self.squareSides)
-        self.squareSidesLabel.grid(column = 0, row = 3, ipady = 10)
+        self.squareSidesScale = ttk.Scale(self.frame, orient=HORIZONTAL, length=200, from_=1, to= 5, value=1, variable=self.squareSidesFloat)
+        self.squareSidesScale.grid(column = 0, row = 2, pady = 25, padx = 20, rowspan= 4)
 
-    def intSquareSides(self):
-        self.squareSides = int(self.intSquareSides)
+        self.squareSidesLabel = ttk.Label(self.frame, textvariable= self.squareSidesFloat)
+        self.squareSidesLabel.grid(column=0, row=6, pady=10, rowspan = 10) #added these rows at the end to space out the button a lot
+
+        self.generateArtButton = ttk.Button(self.frame, text="Create Artwork")
+        self.generateArtButton.grid(row = 16, column=0, pady = 50, ipady = 10, ipadx = 20)
+
+
+
+        
