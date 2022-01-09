@@ -52,9 +52,10 @@ class Picture:
 
         return square_points
     
-    # Adds a triangle on a random side or corner of a square 
+    # Draws triangle randomly in the N, NE, E, ..., NW of a given square
     def add_triangle(self, square):
-        # draw triangle randomly in the N, NE, E, ..., NW of a given square
+        self.colour_switch()
+    
         p1 = [square[0][0], square[0][1]]
         p2 = [square[1][0], square[0][1]]
         p3 = [square[0][0], square[1][1]]
@@ -67,13 +68,11 @@ class Picture:
         p_start = randint(0, 3)
         
         if randint(0, 1):
-            self.ctx.set_source_rgba(random(), random(), random(), random())  # Solid color
             self.ctx.move_to(points[p_start][0],points[p_start][1])
             self.ctx.line_to(points[p_start + 2][0], points[p_start + 2][1])
             self.ctx.line_to(points[p_start + 1][0], points[p_start + 1][1])
             self.ctx.fill()
         else:  # Side Triangle
-            self.ctx.set_source_rgba(random(), random(), random(), random())  # Solid color
             self.ctx.move_to(points[p_start][0], points[p_start][1])
             self.ctx.line_to(center[0], center[1])
             self.ctx.line_to(points[p_start + 1][0], points[p_start + 1][1])
@@ -87,6 +86,8 @@ class Picture:
         #self.ctx.arc(center[0], center[1],circle_width, 0, 2*math.pi)
     
     def add_semicircle(self, square):
+        self.colour_switch()
+        
         p1 = [square[0][0], square[0][1]]
         p2 = [square[1][0], square[0][1]]
         p3 = [square[0][0], square[1][1]]
@@ -100,14 +101,17 @@ class Picture:
         
         if x == 1: # Top
             self.ctx.arc(p1[0] + circle_width, p1[1], circle_width, 0, math.pi)
-            print("T")
         elif x == 2: # Right
             self.ctx.arc(p2[0], p2[1] + circle_width, circle_width, math.pi/2, math.pi/2*3)
         elif x == 3: # Bottom
             self.ctx.arc(p3[0] + circle_width, p3[1], circle_width, math.pi, 0)
         elif x == 4: # Left
-            print("Hello")
-            self.ctx.arc(p3[0], p3[1] - circle_width, circle_width, math.pi/2*3, math.pi/2*3)
+            self.ctx.arc(p3[0], p3[1] - circle_width, circle_width, math.pi/2*3, math.pi/2)
+    
+    # Only changes colour sometimes to get funkier art
+    def colour_switch(self):
+        if randint(0, 1):
+            self.ctx.set_source_rgba(random(), random(), random(), random())  # Solid color
 
-if __name__ == '__main__':
-    Picture(3, 10, "eggs")
+if __name__ == '__main__': # Testing
+    Picture(10, 10)
