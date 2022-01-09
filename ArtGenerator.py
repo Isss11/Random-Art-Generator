@@ -12,7 +12,6 @@ class Picture:
 
         self.surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, WIDTH, HEIGHT)
         self.ctx = cairo.Context(self.surface)
-        cairo.Antialias.NONE
         
         self.ctx.set_source_rgba(0.1, 0.1, 0.1, 1)
         self.ctx.paint()
