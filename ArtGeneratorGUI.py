@@ -57,18 +57,21 @@ class ArtGenerator:
         self.spacingValueText.grid(column = 0, row= 6)
 
         self.generateArtButton = ttk.Button(self.frame, text="Create Artwork", command=lambda: self.create_art())
-        self.generateArtButton.grid(row=15, column=0, ipady=10, ipadx=20, sticky=S)
+        self.generateArtButton.grid(row=13, column=0, ipady=10, ipadx=20, sticky=S)
 
         # Canvas
         self.cv = Canvas(self.frame, width=720, height=720, highlightbackground="gray21")
         self.cv.grid(row=0, column=1, rowspan=16)
 
     def create_art(self):
+        self.generateArtButton.state(['disabled'])
         Picture(int(self.squareDegree.get()), float(self.squareSpacing.get()))
         
         photoimage = ImageTk.PhotoImage(file="funny.png")
         self.root.photoimage = photoimage
         self.cv.create_image((0, 0), image=photoimage, anchor=NW)
+        self.generateArtButton.state(['!disabled'])
+
         
 
 if __name__ == '__main__':
