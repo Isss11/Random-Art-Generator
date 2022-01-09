@@ -54,13 +54,20 @@ class ArtGenerator:
 
         # Creating a label to write out the value of the scale variable (self.degree)
         self.spacingValueText = ttk.Label(self.frame, textvariable=self.squareSpacing)
-        self.spacingValueText.grid(column = 0, row= 6)
+        self.spacingValueText.grid(column = 0, row= 6, sticky=N)
 
         self.progressText = StringVar()
         self.progressText.set("Create Artwork")
 
         self.generateArtButton = ttk.Button(self.frame, textvariable= self.progressText, command=lambda: self.create_art())
         self.generateArtButton.grid(row=13, column=0, ipady=10, ipadx=20, sticky=S)
+
+        #Creating an entry and button to get a filepath
+        self.filePath = StringVar()
+        self.filePath.set("funny.png")
+
+        self.filePathEntry = ttk.Entry(self.frame, textvariable=self.filePath)
+        self.filePathEntry.grid(column = 0, row = 7, sticky= N)
 
         # Canvas
         self.cv = Canvas(self.frame, width=720, height=720, highlightbackground="gray21")
@@ -71,9 +78,10 @@ class ArtGenerator:
         self.progressText.set("Creating Artwork...")
         self.frame.update()
 
-        Picture(int(self.squareDegree.get()), float(self.squareSpacing.get()))
+        print(self.filePath.get())
+        Picture(int(self.squareDegree.get()), float(self.squareSpacing.get()), (self.filePath.get()).rstrip())
         
-        photoimage = ImageTk.PhotoImage(file="funny.png")
+        photoimage = ImageTk.PhotoImage(file=(self.filePath.get()).rstrip())
         self.root.photoimage = photoimage
         self.cv.create_image((2, 2), image=photoimage, anchor=NW)
         self.generateArtButton.state(['!disabled'])
