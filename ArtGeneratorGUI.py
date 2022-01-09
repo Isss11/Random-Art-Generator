@@ -64,7 +64,7 @@ class ArtGenerator:
 
         #Creating an entry and button to get a filepath
         self.filePath = StringVar()
-        self.filePath.set("funny.png")
+        self.filePath.set("funny")
 
         self.filePathEntry = ttk.Entry(self.frame, textvariable=self.filePath)
         self.filePathEntry.grid(column = 0, row = 7, sticky= N)
@@ -81,7 +81,7 @@ class ArtGenerator:
         print(self.filePath.get())
         Picture(int(self.squareDegree.get()), float(self.squareSpacing.get()), (self.filePath.get()).rstrip())
         
-        photoimage = ImageTk.PhotoImage(file=(self.filePath.get()).rstrip())
+        photoimage = ImageTk.PhotoImage(file=(self.filePath.get()).rstrip() + ".png")
         self.root.photoimage = photoimage
         self.cv.create_image((2, 2), image=photoimage, anchor=NW)
         self.generateArtButton.state(['!disabled'])
