@@ -3,14 +3,9 @@ import cairo
 from random import *
 
 class Picture:
-<<<<<<< Updated upstream
     def __init__(self, degree, spacing, filename="default_filename"):
-=======
-    def __init__(self, degree, spacing, filePath):
->>>>>>> Stashed changes
         self.degree = degree
         self.spacing = spacing
-        self.filePath = filePath
         
         WIDTH, HEIGHT = 720, 720
 
@@ -22,11 +17,7 @@ class Picture:
         
         self.create_squares()
         
-<<<<<<< Updated upstream
         self.surface.write_to_png(f"{filename}.png")  # Output to PNG
-=======
-        self.surface.write_to_png(self.filePath)  # Output to PNG
->>>>>>> Stashed changes
         
     def create_squares(self):
         square_points = self.divide_square([[0, 0], [720, 720]], self.degree, self.spacing)
