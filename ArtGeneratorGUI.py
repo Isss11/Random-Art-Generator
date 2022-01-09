@@ -1,5 +1,5 @@
 import math
-from random import choice, randint, random, sample
+from random import choice, randint, random, sample, seed
 from tkinter import *
 from tkinter import ttk
 
@@ -62,7 +62,7 @@ class ArtGenerator:
         self.progressText = StringVar()
         self.progressText.set("Create Artwork")
 
-        self.generateArtButton = ttk.Button(self.frame, textvariable= self.progressText, command=lambda: self.create_art())
+        self.generateArtButton = ttk.Button(self.frame, textvariable= self.progressText, command=lambda: self.create_art(), style="Accent.TButton")
         self.generateArtButton.grid(row=13, column=0, ipady=10, ipadx=20, sticky=S)
 
         #Creating an entry
