@@ -70,7 +70,7 @@ class ArtGenerator:
         self.filePathText.grid(column=0, row = 7, sticky= N)
 
         self.filePath = StringVar()
-        self.filePath.set("funny")
+        self.filePath.set("default")
 
         self.filePathEntry = ttk.Entry(self.frame, textvariable=self.filePath, width = 25)
         self.filePathEntry.grid(column = 0, row = 8, sticky= N)
@@ -84,7 +84,6 @@ class ArtGenerator:
         self.progressText.set("Creating Artwork...")
         self.frame.update()
 
-        print(self.filePath.get())
         Picture(int(self.squareDegree.get()), float(self.squareSpacing.get()), (self.filePath.get()).rstrip())
         
         photoimage = ImageTk.PhotoImage(file=(self.filePath.get()).rstrip() + ".png")
