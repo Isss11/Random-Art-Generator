@@ -2,6 +2,8 @@ import math
 from random import choice, randint, random, sample, seed
 from tkinter import *
 from tkinter import ttk
+import sys
+import subprocess
 
 from PIL import Image, ImageTk
 
@@ -65,6 +67,9 @@ class ArtGenerator:
 
         self.generateArtButton = ttk.Button(self.frame, textvariable= self.progressText, command=lambda: self.create_art(), style="Accent.TButton")
         self.generateArtButton.grid(row=13, column=0, ipady=10, ipadx=20, sticky=S)
+        
+        self.openArtButton = ttk.Button(self.frame, text="Open Image", command=lambda: self.open_image((self.filePath.get()).rstrip() + ".png"))
+        self.openArtButton.grid(row=14, column=0, ipady=10, ipadx=20, sticky=S)
 
         #Creating an entry
         self.filePathText = ttk.Label(self.frame, text="Enter a file name to download your file as a png.", font="helvetica 10 bold")
@@ -93,6 +98,13 @@ class ArtGenerator:
         self.generateArtButton.state(['!disabled'])
         self.progressText.set("Create Artwork")
         self.frame.update()
+    
+    # https://stackoverflow.com/questions/35304492/python-open-multiple-images-in-default-image-viewer
+    def open_image(self, path):
+        imageViewerFromCommandLine = {'linux':'xdg-open',
+                                    'win32':'explorer',
+                                    'darwin':'open'}[sys.platform]
+        subprocess.Popen([imageViewerFromCommandLine, path])
         
 
 if __name__ == '__main__':
