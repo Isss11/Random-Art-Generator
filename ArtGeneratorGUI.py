@@ -69,7 +69,7 @@ class ArtGenerator:
         
         photoimage = ImageTk.PhotoImage(file="funny.png")
         self.root.photoimage = photoimage
-        self.cv.create_image((0, 0), image=photoimage, anchor=NW)
+        self.cv.create_image((2, 2), image=photoimage, anchor=NW)
         self.generateArtButton.state(['!disabled'])
 
         
