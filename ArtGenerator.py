@@ -120,7 +120,7 @@ class Picture:
         
         circle_width = int(math.ceil(abs(square[0][0] - square[1][0])))/2
         
-        x = randint(1,5)
+        x = randint(1,4)
         
         if x == 1: # Top
             self.ctx.arc(p1[0] + circle_width, p1[1], circle_width, 0, math.pi)
@@ -145,7 +145,7 @@ class Picture:
         
         circle_width = int(math.ceil(abs(square[0][0] - square[1][0])))/2
         
-        x = randint(1,5)
+        x = randint(1,4)
         
         if x == 1: # Top Right
             self.ctx.move_to(p2[0], p2[1])
@@ -190,4 +190,4 @@ class Picture:
             self.ctx.stroke()
 
 if __name__ == '__main__': # Testing
-    Picture(10, 10)
+    Picture(1, 10)

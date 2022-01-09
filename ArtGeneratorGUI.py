@@ -15,7 +15,6 @@ class ArtGenerator:
         self.root.call("source", "sun-valley.tcl")
         self.root.call("set_theme", "dark")
 
-
         self.frame = ttk.Frame(self.root, padding="20")
         self.frame.grid(column=0, row=0, sticky=(N, W, E, S))
         self.root.columnconfigure(0, weight=1)
