@@ -62,16 +62,19 @@ class ArtGenerator:
         self.generateArtButton = ttk.Button(self.frame, textvariable= self.progressText, command=lambda: self.create_art())
         self.generateArtButton.grid(row=13, column=0, ipady=10, ipadx=20, sticky=S)
 
-        #Creating an entry and button to get a filepath
+        #Creating an entry
+        self.filePathText = ttk.Label(self.frame, text="Enter a file name to download your file as a png.", font="helvetica 10 bold")
+        self.filePathText.grid(column=0, row = 7, sticky= N)
+
         self.filePath = StringVar()
         self.filePath.set("funny")
 
-        self.filePathEntry = ttk.Entry(self.frame, textvariable=self.filePath)
-        self.filePathEntry.grid(column = 0, row = 7, sticky= N)
+        self.filePathEntry = ttk.Entry(self.frame, textvariable=self.filePath, width = 25)
+        self.filePathEntry.grid(column = 0, row = 8, sticky= N)
 
         # Canvas
         self.cv = Canvas(self.frame, width=720, height=720, highlightbackground="gray21")
-        self.cv.grid(row=0, column=1, rowspan=16)
+        self.cv.grid(row=0, column=1, rowspan=16, padx= (25, 0))
 
     def create_art(self):
         self.generateArtButton.state(['disabled'])
