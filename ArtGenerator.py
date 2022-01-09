@@ -39,6 +39,7 @@ class Picture:
         self.add_triangle(square)
         
         self.add_semicircle(square)
+        self.add_quartercircle(square)
         
         if randint(1, 3) == 3:
             self.add_circle(square)
@@ -115,6 +116,29 @@ class Picture:
         elif x == 3: # Bottom
             self.ctx.arc(p3[0] + circle_width, p3[1], circle_width, math.pi, 0)
         elif x == 4: # Left
+            self.ctx.arc(p3[0], p3[1] - circle_width, circle_width, math.pi/2*3, math.pi/2)
+    
+    def add_quartercircle(self, square):
+        self.colour_switch()
+        
+        p1 = [square[0][0], square[0][1]]
+        p2 = [square[1][0], square[0][1]]
+        p3 = [square[0][0], square[1][1]]
+        p4 = [square[1][0], square[1][1]]
+        center = [int((square[0][0] + square[1][0]) / 2),
+                  int((square[0][1] + square[1][1]) / 2)]
+        
+        circle_width = int(math.ceil(abs(square[0][0] - square[1][0])))/2
+        
+        x = randint(1,5)
+        
+        if x == 1: # Top Right
+            self.ctx.arc(p2[0], p2[1], circle_width, 0, math.pi)
+        elif x == 2: # Bottom Right
+            self.ctx.arc(p2[0], p2[1] + circle_width, circle_width, math.pi/2, math.pi/2*3)
+        elif x == 3: # Bottom Left
+            self.ctx.arc(p3[0] + circle_width, p3[1], circle_width, math.pi, 0)
+        elif x == 4: # Top Left
             self.ctx.arc(p3[0], p3[1] - circle_width, circle_width, math.pi/2*3, math.pi/2)
     
     # Only changes colour sometimes to get funkier art
