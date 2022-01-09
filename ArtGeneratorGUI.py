@@ -56,7 +56,10 @@ class ArtGenerator:
         self.spacingValueText = ttk.Label(self.frame, textvariable=self.squareSpacing)
         self.spacingValueText.grid(column = 0, row= 6)
 
-        self.generateArtButton = ttk.Button(self.frame, text="Create Artwork", command=lambda: self.create_art())
+        self.progressText = StringVar()
+        self.progressText.set("Create Artwork")
+
+        self.generateArtButton = ttk.Button(self.frame, textvariable= self.progressText, command=lambda: self.create_art())
         self.generateArtButton.grid(row=13, column=0, ipady=10, ipadx=20, sticky=S)
 
         # Canvas
@@ -65,13 +68,17 @@ class ArtGenerator:
 
     def create_art(self):
         self.generateArtButton.state(['disabled'])
+        self.progressText.set("Creating Artwork...")
+        self.frame.update()
+
         Picture(int(self.squareDegree.get()), float(self.squareSpacing.get()))
         
         photoimage = ImageTk.PhotoImage(file="funny.png")
         self.root.photoimage = photoimage
         self.cv.create_image((0, 0), image=photoimage, anchor=NW)
         self.generateArtButton.state(['!disabled'])
-
+        self.progressText.set("Create Artwork")
+        self.frame.update()
         
 
 if __name__ == '__main__':
