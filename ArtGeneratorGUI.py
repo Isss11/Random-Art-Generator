@@ -66,10 +66,10 @@ class ArtGenerator:
         self.progressText.set("Create Artwork")
 
         self.generateArtButton = ttk.Button(self.frame, textvariable= self.progressText, command=lambda: self.create_art(), style="Accent.TButton")
-        self.generateArtButton.grid(row=13, column=0, ipady=10, ipadx=20, sticky=S)
+        self.generateArtButton.grid(row=10, column=0, ipady=10, ipadx=20, sticky=S)
         
         self.openArtButton = ttk.Button(self.frame, text="Open Image", command=lambda: self.open_image((self.filePath.get()).rstrip() + ".png"))
-        self.openArtButton.grid(row=14, column=0, ipady=10, ipadx=20, sticky=S)
+        self.openArtButton.grid(row=11, column=0, ipady=10, ipadx=20, sticky=S)
 
         #Creating an entry
         self.filePathText = ttk.Label(self.frame, text="Enter a file name to download your file as a png.", font="helvetica 10 bold")
