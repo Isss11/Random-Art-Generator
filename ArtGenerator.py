@@ -8,7 +8,7 @@ class Picture:
         self.degree = degree
         self.spacing = spacing
         
-        WIDTH, HEIGHT = 720*10, 720*10
+        WIDTH, HEIGHT = 720, 720
 
         self.surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, WIDTH, HEIGHT)
         self.ctx = cairo.Context(self.surface)
@@ -21,7 +21,7 @@ class Picture:
         self.surface.write_to_png(f"{filename}.png")  # Output to PNG
         
     def create_squares(self):
-        square_points = self.divide_square([[0, 0], [720*10, 720*10]], self.degree, self.spacing)
+        square_points = self.divide_square([[0, 0], [720, 720]], self.degree, self.spacing)
 
         for square in square_points:
             self.create_square_art(square)
@@ -191,4 +191,4 @@ class Picture:
             self.ctx.stroke()
 
 if __name__ == '__main__': # Testing
-    Picture(10, 10)
+    Picture(1, 10)
