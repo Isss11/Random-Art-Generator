@@ -12,6 +12,7 @@ class ArtGenerator:
         self.root = root
         self.root.title("Random Art Generator")
         
+        # https://github.com/rdbende/Sun-Valley-ttk-theme
         self.root.call("source", "sun-valley.tcl")
         self.root.call("set_theme", "dark")
 
