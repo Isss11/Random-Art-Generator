@@ -27,21 +27,33 @@ class Picture:
 
     # Creates randomized art on any inputted square
     def create_square_art(self, square):
-        self.add_triangle(square)
+        if randint(0,1):
+            self.add_triangle(square)
         
-        self.add_semicircle(square)
-        self.add_quartercircle(square)
+        if randint(0,1):
+            self.add_semicircle(square)
         
-        if randint(1, 3) == 3:
-            pass
+        if randint(0,1):
+            self.add_quartercircle(square)
+        
+        if randint(1, 4) == 3:
             self.add_circle(square)
         
         miniSquares = self.divide_square(square, 2)
         
         for miniSquare in miniSquares:
-            if randint(1, 10) > 7:
-                pass
+            if randint(0,1):
                 self.add_triangle(miniSquare)
+            
+            if randint(0,1):
+                self.add_semicircle(miniSquare)
+            
+            if randint(0,1):
+                self.add_quartercircle(miniSquare)
+            
+            if randint(1, 4) == 3:
+                self.add_circle(miniSquare)
+            
 
     # Divides a given square into 'degree' pieces
     # Increase spacing to add space between squares, Decrease to add overlap
@@ -53,6 +65,9 @@ class Picture:
                 square_points.append([[int(x+new_square_width/spacing), int(y+new_square_width/spacing)], [
                     int(x+new_square_width-new_square_width/spacing), int(y+new_square_width-new_square_width/spacing)]])
 
+        for i in square_points:
+            i.sort()
+            
         return square_points
     
     # Draws triangle randomly in the N, NE, E, ..., NW of a given square
@@ -175,4 +190,4 @@ class Picture:
             self.ctx.stroke()
 
 if __name__ == '__main__': # Testing
-    Picture(6, 10)
+    Picture(10, 10)
