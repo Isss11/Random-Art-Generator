@@ -71,7 +71,7 @@ class ArtGenerator:
         self.openArtButton = ttk.Button(self.frame, text="Open Image", command=lambda: self.open_image((self.filePath.get()).rstrip() + ".png"))
         self.openArtButton.grid(row=11, column=0, ipady=10, ipadx=20, sticky=S)
 
-        #Creating an entry
+        # Creating an entry
         self.filePathText = ttk.Label(self.frame, text="Enter a file name to download your file as a png.", font="helvetica 10 bold")
         self.filePathText.grid(column=0, row = 7, sticky= N)
 
@@ -81,9 +81,20 @@ class ArtGenerator:
         self.filePathEntry = ttk.Entry(self.frame, textvariable=self.filePath, width = 25)
         self.filePathEntry.grid(column = 0, row = 8, sticky= N)
 
+        # Creating checkButton for light theme
+        self.theme = StringVar(value="dark")
+        self.lightThemeCheck = ttk.Checkbutton(self.frame, text="Light Theme", command=self.changeTheme, variable=self.theme, onvalue="light", offvalue= "dark")
+        self.lightThemeCheck.grid(column=0, row=15, sticky=(W, S))
+
         # Canvas
         self.cv = Canvas(self.frame, width=720, height=720, highlightbackground="gray21")
         self.cv.grid(row=0, column=1, rowspan=16, padx= (25, 0))
+
+    def changeTheme(self):
+        if (self.theme.get() == "light"):
+            self.root.call("set_theme", "light")
+        else:
+            self.root.call("set_theme", "dark")
 
     def create_art(self):
         self.generateArtButton.state(['disabled'])
