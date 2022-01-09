@@ -3,7 +3,7 @@ import cairo
 from random import *
 
 class Picture:
-    def __init__(self, degree, spacing, filename):
+    def __init__(self, degree, spacing, filename="default_filename"):
         self.degree = degree
         self.spacing = spacing
         
