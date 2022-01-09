@@ -45,7 +45,7 @@ class ArtGenerator:
         # 1 means 1x1 grid, 3 means 3x3 grid, etc. 
         self.squareDegree = StringVar()
 
-        self.squareDegreeScale = ttk.Scale(self.frame, orient=HORIZONTAL, length=200, from_=1, to=20, value=10, command=lambda s: self.squareDegree.set(math.floor(float(s))))
+        self.squareDegreeScale = ttk.Scale(self.frame, orient=HORIZONTAL, length=200, from_=1, to=100, value=10, command=lambda s: self.squareDegree.set(math.floor(float(s))))
         self.squareDegreeScale.set(10)
         self.squareDegreeScale.grid(column=0, row=2, padx=20, sticky=N)
 
@@ -64,6 +64,9 @@ class ArtGenerator:
 
         self.progressText = StringVar()
         self.progressText.set("Create Artwork")
+        
+        self.filePath = StringVar()
+        self.filePath.set("default")
 
         self.generateArtButton = ttk.Button(self.frame, textvariable= self.progressText, command=lambda: self.create_art(), style="Accent.TButton")
         self.generateArtButton.grid(row=10, column=0, ipady=10, ipadx=20, sticky=S)
@@ -75,8 +78,7 @@ class ArtGenerator:
         self.filePathText = ttk.Label(self.frame, text="Enter a file name to download your file as a png.", font="helvetica 10 bold")
         self.filePathText.grid(column=0, row = 7, sticky= N)
 
-        self.filePath = StringVar()
-        self.filePath.set("default")
+        
 
         self.filePathEntry = ttk.Entry(self.frame, textvariable=self.filePath, width = 25)
         self.filePathEntry.grid(column = 0, row = 8, sticky= N)
