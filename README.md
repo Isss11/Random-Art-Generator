@@ -1,3 +1,6 @@
+![Banner](https://github.com/Isss11/GrandRiverRenegadesHackTheJob2022/blob/main/readme_files/readmeimage.png?raw=true)
+
+
 # GrandRiverRenegadesHackTheJob2022
 This is the repository of team "Grand River Renegades" project at "Hack the Job" 2022.
 ## Random Art Generator
