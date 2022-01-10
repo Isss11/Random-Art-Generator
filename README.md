@@ -4,7 +4,7 @@
 # GrandRiverRenegadesHackTheJob2022
 This is the repository of team "Grand River Renegades" project at "Hack the Job" 2022.
 ## Random Art Generator
-A random art generator created with python, tkinter, and pycario
+A random art generator created with python, tkinter, pycario and Tcl themes.
 
 ### General Info
 
@@ -21,4 +21,4 @@ A random art generator created with python, tkinter, and pycario
 
 ```pip install --upgrade Pillow```
 
-```pip install tk```
+**Having an Error With Installation?**: When installing the program by downloading the files as zip and extracting the folder you may encounter an error when running. If you do, it is probably because of an issue with Tcl themes that were used in the project. To solve this, go to https://github.com/rdbende/Sun-Valley-ttk-theme. Then download the contents of this repository as a zip, and paste the contents of the unzipped folder into the folder for this project. It should work after that.
