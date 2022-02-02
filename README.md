@@ -2,7 +2,7 @@
 
 
 # GrandRiverRenegadesHackTheJob2022
-This is the repository of team "Grand River Renegades" project at "Hack the Job" 2022. See our presentation of it at: https://youtu.be/yMrGF7CUkKs?t=6298.
+This is the repository of team "Grand River Renegades" project at "Hack the Job" 2022. See our presentation of it [here](https://youtu.be/yMrGF7CUkKs?t=6298).
 ## Random Art Generator
 A random art generator created with python, tkinter, pycario and Tcl themes.
 
